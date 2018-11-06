@@ -1,0 +1,666 @@
+$canvasWidth: 300px;
+$canvasHeight: 300px;
+$sliderDiametre: 18px;
+$blue_navbar: rgba(117,140,158, 0.75);
+$blue_navbar_no_transp: rgb(151, 169, 182);
+$time_1: 0.5s;
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+a, a:link, a:visited{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+img{
+	border: none;
+	outline: none;
+}
+
+
+
+.container-hor{
+	display: grid;
+    justify-content: center;
+    grid-template-columns: 370px 500px;
+    grid-template-rows: 30px 340px 64px;
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+    margin-bottom: 60px;
+	.button-container{
+		display: grid;
+		justify-content: center;
+		grid-template-columns: 150px 150px;
+		grid-column-gap: 10px;
+		.set-as-button{
+			//grid-column: 1;
+			width: 180px;
+		}
+		.generate-button{
+			//grid-column: 2;
+			width: 180px;
+		}
+	}
+}
+
+.hidden{
+	visibility: hidden;
+}
+.visible{
+	visibility: visible;
+}
+
+//.crop-tools{
+//	transition: visibility cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+//}
+
+.box-title{
+	color: #5E85A4;
+    font-weight: 450;
+    text-align: center;
+    font-size: 1.3rem;
+	font-family: -apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	font-family: -moz-apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: -0.5px;
+    align-self: self-end;
+}
+
+.container{
+	height: $canvasHeight;
+	padding: 0;
+	border: 1.5px solid #8D9FAD;
+	grid-row: 2;
+}
+
+.image-list{
+	height: 340px;
+}
+
+.img-container{
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.img-cont-row{
+	flex-direction: row;
+}
+
+.img-cont-col{
+	flex-direction: column;
+}
+
+h1{
+	font-family: -apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 	
+	font-family: -moz-apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	color: gray;
+	text-align: center;
+	padding: 1rem 0 0.5rem 0;
+}
+
+h3{
+	font-family: -apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 	
+	font-family: -moz-apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	color: lightgray;
+	text-align: center;
+	text-decoration-line: underline;
+	font-weight: 200;
+	//font-size: 5rem;
+	padding: 0 0 0.2rem 0;
+}
+
+
+#target{
+	border: 3px dashed #c7cacc;
+    height: 150px;
+    width: 540px;
+    margin: 50px auto;
+	p{
+		text-align: center;
+		color: lightgray;
+		font-family: -apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 	
+		font-family: -moz-apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	}
+}
+
+.popped-out{
+	background-color: #e7f4ff;
+	transform: scale(1.02, 1.02);
+	box-shadow: 0px 2px 4px 0px #b3b3b3
+}
+
+.target-div{
+	transition: 
+		background-color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		transform cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		box-shadow cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+}
+
+#listica{
+	margin: 0;
+	padding: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	list-style-type: none;
+	.list-item{
+		text-decoration: none;
+		font-family: -apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 	
+		font-family: -moz-apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		padding: 9px 7px 9px 7px;
+		font-weight: 250;
+		color: #999999;
+	}
+	
+	.list-item-selected{
+		background-color: #64a5ea;
+		color: white;
+	}
+}
+
+
+.edit-panel-container{
+	display: grid;
+    grid-template-columns: 30px 180px 30px 25px 30px 180px 30px;
+    grid-template-rows: 18px 28px 15px 48px;
+    justify-content: center;
+    align-self: self-end;
+    justify-items: center;
+    align-items: center;
+	.crop-set-button{
+		grid-column-start: 3;
+		grid-column-end: span 3;
+	}
+	p, .slider-button{
+		font-family: -apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 	
+		font-family: -moz-apple-system, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		font-size: 0.8rem;
+		color: #8D9FAD;
+		font-weight: 100;
+	
+	}
+	.slider-button{
+		font-size: 1.2rem;
+	}
+}
+//Grid positions as classes
+.first-col{
+	grid-column: 1;
+}
+.second-col{
+	grid-column: 2;
+}
+.third-col{
+	grid-column: 3;
+}
+.fourth-col{
+	grid-column: 4;
+}
+.fifth-col{
+	grid-column: 5;
+}
+.sixth-col{
+	grid-column: 6;
+}
+.seventh-col{
+	grid-column: 7;
+}
+
+.first-row{
+	grid-row: 1;
+}
+.second-row{
+	grid-row: 2;
+}
+.third-row{
+	grid-row: 3;
+}
+.fourth-row{
+	grid-row: 4;
+}
+.fifth-row{
+	grid-row: 5;
+}
+.sixth-row{
+	grid-row: 6;
+}
+.seventh-row{
+	grid-row: 7;
+}
+
+//justifications and position control
+.just-right{
+	justify-self: right;
+}
+.just-left{
+	justify-self: left;
+}
+.just-center{
+	justify-self: center;
+}
+.align-center{
+	align-self: center;
+}
+
+
+
+
+
+
+//SLIDER FROM W3 SCHOOLS
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    //-webkit-appearance: none;  /* Override default CSS styles */
+    //appearance: none;
+    //width: 100%; /* Full-width */
+    //height: 25px; /* Specified height */
+    //background: #d3d3d3; /* Grey background */
+    //outline: none; /* Remove outline */
+    //opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    //-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+	//transition: opacity .2s;
+	-webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 2px;
+    background: #DFDFDF;
+    outline: none;
+    opacity: 0.8;
+    -webkit-transition: .2s;
+	transition: opacity .2s;
+	margin-bottom: 10px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: $sliderDiametre; /* Set a specific slider handle width */
+    height: $sliderDiametre; /* Slider handle height */
+	background: #8D9FAD; /* Green background */
+	border-radius: 50%;
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: $sliderDiametre; /* Set a specific slider handle width */
+    height: $sliderDiametre; /* Slider handle height */
+	background: #8D9FAD; /* Green background */
+	border-radius: 50%;
+    cursor: pointer; /* Cursor on hover */
+}
+
+.partition-line{
+	width: 880px;
+    margin: 20px auto 20px auto;
+    border: 1px solid #e9e9ea;
+}
+
+.wrapper-1{
+	width: 500px;
+    height: 300px;
+    margin: 0px auto;
+    background-color: #ececec;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+	.wrapper-2{
+		width: 500px;
+		height: 300px;
+		background-size: cover;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		z-index: 1;
+	}
+}
+
+.img-cropper-rect-frame{
+	width: 200px;
+    height: 200px;
+    z-index: 5;
+    position: absolute;
+    left: 150px;
+    top: 50px;
+}
+
+.img-cropper-rect-frame::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+	border: 1px solid #8D9FAD;
+	box-shadow: 0 0 0 100vw rgba(0, 0, 0, .15);
+    content: '';
+    pointer-events: none;
+}
+
+
+
+
+
+
+/*/ --------- Styles from Fastenable's css --------- /*/
+
+.btn-wpr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+.txt{
+	color: green;
+	background-color: yellow;
+	width: 50%;
+	text-align: center;
+}
+
+.btn{
+    text-decoration: none;
+    border-radius: 0.2rem;
+    color: white;
+    background-color: $blue_navbar;
+    width: 180px;
+    height: 60px;
+    font-size: 1.5rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    -webkit-box-shadow: 0px 2px 4px 0px #b3b3b3;
+    box-shadow: 0px 2px 4px 0px #b3b3b3;
+    padding: 0 0 0 55px;
+    position: relative;
+    &::before, &::after {
+    	content: '';
+    	position: absolute;
+    	top: 0.1em;
+    	bottom: 0.1em;
+    	left: 0.1em;
+    	right: 0.1em;
+    	border-radius: 0.2rem;
+    	
+    }
+	&::before {
+	    transform: scale(0, 1);
+	    transition: transform cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+	     border-bottom $time_1,
+	     border-top $time_1;
+	}
+	&::after {
+	    transform: scale(1, 0);
+	    transition: transform cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+	     border-left $time_1,
+	     border-right $time_1;
+	}
+
+    &:hover::before {
+		border-bottom: 1px solid white;
+		border-top: 1px solid white;
+		transform: scale(1, 1);
+	}
+    &:hover::after {
+		border-left: 1px solid white;
+		border-right: 1px solid white;
+		transform: scale(1, 1);
+	}
+}
+
+
+.btn2{
+    text-decoration: none;
+    border-radius: 0.2rem;
+    color: white;
+    background-color: $blue_navbar;
+    width: 180px;
+    height: 60px;
+    font-size: 1.5rem;
+    font-family: ubuntu;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    -webkit-box-shadow: 0px 2px 4px 0px #b3b3b3;
+    box-shadow: 0px 2px 4px 0px #b3b3b3;
+    padding: 0 0 0 0px;
+    position: relative;
+    border: none;
+    transition: width cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+    opacity cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+    padding-left cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+    background-color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+    color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+    border cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+    font-weight cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+    &::before{/*, &::after {*/
+    	content: '';
+    	position: absolute;
+    	top: 50%;
+    	bottom: 50%;
+    	left: 0;
+    	width: 0;
+    	border: 1px solid $blue_navbar;
+    	opacity: 0;
+    	transition: width cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		    opacity $time_1,
+		    padding-left $time_1;
+    }
+    &:hover::before {
+		width: 45px;
+		opacity: 1;
+	}
+	&:hover {
+		padding-left: 60px;
+		font-weight: 200;
+		color: $blue_navbar;
+		background-color: white;
+		border: 2px solid $blue_navbar;
+	}
+	&::after{
+		content: '';
+		position: absolute;
+		left: 45px;
+		top: 38%;
+		border-radius: 50%;
+		border: 7px solid $blue_navbar;
+		opacity: 0;
+		transform: scale(0);
+		transition: transform cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		    opacity cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+	}
+	&:hover::after{
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.btn-invert{
+    text-decoration: none;
+    border-radius: 0.2rem;
+    color: white;
+    background-color: #8D9FAD;
+    width: 180px;
+    height: 60px;
+    font-size: 1.5rem;
+    font-family: ubuntu;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    -webkit-box-shadow: 0px 2px 4px 0px #b3b3b3;
+    box-shadow: 0px 2px 4px 0px #b3b3b3;
+    padding: 0 0 0 0px;
+    position: relative;
+    border: 1px solid $blue_navbar_no_transp;
+	transition: 
+		width cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		opacity cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		padding-left cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		background-color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		border cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		font-weight cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+    &::before{/*, &::after {*/
+    	content: '';
+    	position: absolute;
+    	top: 50%;
+    	bottom: 50%;
+    	left: -1px;
+    	width: 0;
+    	border: 0.6px solid $blue_navbar_no_transp;
+    	opacity: 0;
+    	transition: width cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		    opacity $time_1,
+		    padding-left $time_1;
+    }
+    &:hover::before {
+		width: 35px;
+		opacity: 1;
+	}
+	&:hover {
+		padding-left: 39px;
+		font-weight: 200;
+		color: $blue_navbar;
+		background-color: white;
+		border: 1px solid $blue_navbar;
+	}
+	&::after{
+		content: '';
+		position: absolute;
+		left: 29px;
+		top: 39.5%;
+		border-radius: 50%;
+		/*border: 4px solid $blue_navbar_no_transp;*/
+		opacity: 0;
+		transform: scale(0);
+		transition: transform cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		    opacity cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+	}
+	&:hover::after{
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+.btn-invert-disabled{
+	cursor: default;
+	pointer-events: none;
+    text-decoration: none;
+    border-radius: 0.2rem;
+    color: #F4F4F4;
+    background-color: #E5E5E5;
+    width: 180px;
+    height: 60px;
+    font-size: 1.5rem;
+    font-family: ubuntu;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    -webkit-box-shadow: 0px 2px 4px 0px #b3b3b3;
+    box-shadow: 0px 2px 4px 0px #b3b3b3;
+    padding: 0 0 0 0px;
+    position: relative;
+	border: 1px solid #E5E5E5;
+	transition: 
+		width cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		opacity cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		padding-left cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		background-color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		color cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		border cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1,
+		font-weight cubic-bezier(0.59, 0.17, 0.22, 0.92) $time_1;
+}
+
+.btn-md{
+    width: 220px;
+    height: 60px;
+    font-size: 2.2rem;
+}
+
+.btn-sm{
+    width: 190px;
+    height: 52px;
+    font-size: 1.3rem;
+}
+
+.btn-xsm{
+    width: 150px;
+    height: 45px;
+    font-size: 1rem;
+}
+
+.btn-xxsm{
+	width: 200px;
+	height: 30px;
+	font-size: 0.85rem;
+}
+
+
+.no-shadow{
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+
+.micro-button{
+	height: 20px;
+    float: right;
+    opacity: .8;
+	transition: 
+		transform cubic-bezier(0.59, 0.17, 0.22, 0.92) 0.2s,
+		opacity cubic-bezier(0.59, 0.17, 0.22, 0.92) 0.2s;
+	margin-right: 3px;
+}
+.micro-button:hover{
+	opacity: 1;
+	transform: scale(1.05, 1.05);
+}
+
+
+
+
+
+/*/  Draggable element from W3 Schools  /*/
+#mydiv {
+    position: absolute;
+    z-index: 9;
+    background-color: #2196F3;
+    border: 1px solid #d3d3d3;
+	text-align: center;
+	cursor: move;
+	width: 250px;
+	height: 250px;
+	display: grid;
+	img{
+		width: 100%;
+	}
+}
+
+#display-img {
+    position: absolute;
+    z-index: 11;
+    background-color: #2196F3;
+    border: 1px solid #d3d3d3;
+	text-align: center;
+	cursor: move;
+	display: grid;
+	img{
+		width: 100%;
+	}
+}

@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+    function myfunction()
+    {
+        promise = longfunctionfirst().then(shortfunctionsecond);
+    }
+    function longfunctionfirst()
+    {
+        d = new $.Deferred();
+        setTimeout('alert("first function finished");d.resolve()',3000);
+        return d.promise()
+    }
+    function shortfunctionsecond()
+    {
+        d = new $.Deferred();
+        setTimeout('alert("second function finished");d.resolve()',200);
+        return d.promise()
+    }
+    </script>
+</head>
+<body>
+    <a href="#" onclick="javascript:myfunction();return false;">Call my function</a>
+</body>
+</html>

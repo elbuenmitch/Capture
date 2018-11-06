@@ -1,0 +1,16 @@
+/* - - - - - Creates the table to save the Users - - - - - */
+CREATE TABLE uploadedImages(
+	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50),
+	newName VARCHAR(50),
+    size int,
+    type VARCHAR(10),
+    width INT,
+    height INT,
+    userId VARCHAR(50),
+    dateUploaded datetime NOT NULL default CURRENT_TIMESTAMP,
+    sampleOrRef VARCHAR(5),
+    groupId VARCHAR(50),
+    coordinates !!!!!!!???????--------- HOW THE FUCKKKKKKK!!!!!!!???????---------
+	PRIMARY KEY (id)
+);

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Capture html</title>
+  <!-- <link rel="stylesheet" href="css/bulma.css"> -->
+  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <h1 class="title is-2">Capture Test</h1>
+  <h3>Test file to play around with the functionalities of in-Browser image capturing and handling.</h3>
+
+  <input type="file" accept="image/*" id="file-input1" name="image">
+  <div class="target-div"  id="target"><p>You can drag an image file here</p></div>
+
+  <!--Mouse Position for testing-->
+  <h3 id="mouse-pos"></h3>
+  <h3 id="mouse-pos2"></h3>
+
+  <hr class="partition-line">
+
+  <!-- list and preview area container -->
+  <div class="container-hor">
+
+    <!-- Uploaded images section -->
+    <p class="box-title">Uploaded Images</p>
+    <div class="container image-list">
+      <ul id="listica"></ul>
+    </div>
+
+    <!-- Preview and crop section -->
+    <p class="box-title">Preview and Crop</p>
+    <div class="container img-container wrapper-1">
+      <div class="img-cropper-rect-frame crop-tools hidden">
+      </div>
+      <div id="drag-container" class="wrapper-2">
+        <img id="display-img">
+      </div>
+    </div>
+  
+    <!-- Buttons -->
+    <div class="button-container">
+      <div class="btn-wpr set-as-button just-right">
+        <a href="#" class="btn-invert-disabled btn-xxsm no-shadow" id="but-set-as">set as reference image</a>
+      </div>
+      <div class="btn-wpr generate-button just-left">
+        <a href="#" class="btn-invert-disabled btn-xxsm no-shadow" id="but-genera">generate new sample</a>
+      </div>
+    </div>
+
+    <!-- Edit panel -->
+    <div class="edit-panel-container">
+      
+      <p class="slider-lable second-col first-row crop-tools hidden">zoom</p>
+      <div class="slider-button first-col second-row crop-tools hidden">-</div>
+      <div class="slidecontainer second-col second-row crop-tools hidden">
+        <input type="range" min="1" max="3" value="0" step="0.1" class="slider" id="slider-zoom">
+      </div>
+      <div class="slider-button third-col second-row crop-tools hidden">+</div>
+      <p id="output-zoom" class="third-row second-col crop-tools hidden"></p>
+
+      <p class="slider-lable sixth-col first-row crop-tools hidden">angle</p>
+      <div class="slider-button fifth-col second-row crop-tools hidden">-</div>
+      <div class="slidecontainer second-row sixth-col crop-tools hidden">
+        <input type="range" min="-90" max="90" value="0" class="slider" id="slider-angle">
+      </div>
+      <div class="slider-button seventh-col second-row crop-tools hidden">+</div>
+      <p id="output-angle" class="third-row sixth-col crop-tools hidden"></p>
+
+      <div class="btn-wpr crop-set-button fourth-row">
+        <div class="btn-invert-disabled btn-xxsm no-shadow" id="but-crop" onclick="enterCroppingMode()">crop</div>
+      </div>
+
+      <div class="btn-wpr crop-set-button fourth-row">
+        <div class="btn-invert btn-xxsm no-shadow hidden" id="but-set-crop" onclick="saveDisplayAttributes()">set</div>
+      </div>
+
+    </div>
+
+  </div>
+  
+  <div class="btn-wpr">
+    <div class="btn-invert-disabled btn-md no-shadow" id="but-find">Find!</div>
+  </div>
+
+  <li class='list-item'>imagen_1.jpg<img src="./img/micro-but-del.svg" class="micro-button micro-but-delete" onclick="deleteImage()"></li>
+
+
+  <div style="height: 500px"></div>
+
+  <!--div class="container" style="height: 200px">
+    <h1>Drag me around</h1>
+  </div>
+  <div id="drag-container" class="container" style="width: 50%; margin: 0 auto; overflow: hidden;">
+      <div id="mydiv" >
+          <img id="mydivheader" src="./img/micro-but-del.svg">
+      </div>
+  </div-->
+  <button onclick="pythonAndPhp()" class="btn-invert btn-md no-shadow">python!</button>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- <script src="js/main-no-scale.js"></script> -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
